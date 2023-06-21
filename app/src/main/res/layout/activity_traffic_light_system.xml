@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="carModelName"
+            type="String" />
+
+        <variable
+            name="viewModel"
+            type="com.example.trafficlights.trafficLights.TrafficLightsViewModel" />
+
+        <import type="com.example.trafficlights.enums.TrafficLightState" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/carModelTitle"
+            style="@style/Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/traffic_lights_title_margin_top"
+            android:layout_marginTop="@dimen/traffic_lights_title_margin_horizontal"
+            android:layout_marginEnd="@dimen/traffic_lights_title_margin_horizontal"
+            app:carNameTitle="@{carModelName}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Car Model Name" />
+
+        <com.example.trafficlights.customView.TrafficLightView
+            android:id="@+id/redLight"
+            handleTrafficLightState="@{viewModel.currentTrafficLightsState == TrafficLightState.RED}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/traffic_lights_item_margin_top_first"
+            app:layout_constraintEnd_toEndOf="@+id/carModelTitle"
+            app:layout_constraintStart_toStartOf="@+id/carModelTitle"
+            app:layout_constraintTop_toBottomOf="@id/carModelTitle"
+            app:trafficLight="RED" />
+
+        <com.example.trafficlights.customView.TrafficLightView
+            android:id="@+id/yellowLight"
+            handleTrafficLightState="@{viewModel.currentTrafficLightsState == TrafficLightState.YELLOW}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/traffic_lights_item_margin_top"
+            app:layout_constraintEnd_toEndOf="@+id/carModelTitle"
+            app:layout_constraintStart_toStartOf="@+id/carModelTitle"
+            app:layout_constraintTop_toBottomOf="@id/redLight"
+            app:trafficLight="YELLOW" />
+
+        <com.example.trafficlights.customView.TrafficLightView
+            android:id="@+id/greenLight"
+            handleTrafficLightState="@{viewModel.currentTrafficLightsState == TrafficLightState.GREEN}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/traffic_lights_item_margin_top"
+            app:layout_constraintEnd_toEndOf="@+id/carModelTitle"
+            app:layout_constraintStart_toStartOf="@+id/carModelTitle"
+            app:layout_constraintTop_toBottomOf="@id/yellowLight"
+            app:trafficLight="GREEN" />
+
+        <TextView
+            android:id="@+id/trafficMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/traffic_lights_message_margin_top"
+            android:textAllCaps="true"
+            app:layout_constraintEnd_toEndOf="@+id/carModelTitle"
+            app:layout_constraintStart_toStartOf="@+id/carModelTitle"
+            app:layout_constraintTop_toBottomOf="@id/greenLight"
+            app:trafficMessage="@{viewModel.currentTrafficLightsState}"
+            tools:text="GO!" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

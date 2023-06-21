@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="carInputViewModel"
+            type="com.example.trafficlights.carInput.CarInputViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".carInput.CarInputActivity">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/topGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/carModelContainer"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/car_model_input_container_margin_horizontal"
+            android:layout_marginTop="@dimen/car_model_input_container_margin_top"
+            app:inputHelperEnabled="@{carInputViewModel.isCarModelValid()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/topGuideline">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cardModelInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/car_model_input_hint"
+                android:inputType="text"
+                android:lines="1"
+                android:text="@={carInputViewModel.carModel}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/car_model_input_button_margin_top"
+            android:enabled="@{carInputViewModel.isCarModelValid()}"
+            android:text="@string/car_model_input_button_text"
+            app:layout_constraintEnd_toEndOf="@+id/carModelContainer"
+            app:layout_constraintStart_toStartOf="@+id/carModelContainer"
+            app:layout_constraintTop_toBottomOf="@+id/carModelContainer" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
